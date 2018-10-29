@@ -1,5 +1,7 @@
 package boletin5_1;
 
+import javax.swing.JOptionPane;
+
 public class Conta {
 
     private String nome;
@@ -40,30 +42,28 @@ public class Conta {
         return saldo;
     }
 
+//    public void ingresarSaldo(double dinero) {
+//        if (dinero <= 0) {
+//            dinero = 0;
+//        }
+//        saldo += dinero;
+//
+//    }
+
     public void ingresarSaldo(double dinero) {
         if (dinero <= 0) {
-            dinero = 0;
+            JOptionPane.showMessageDialog(null, "No tienes dinero para ingresar.");
+        } else if (saldo >= dinero) {
+            saldo += dinero;
         }
-        saldo += dinero;
-
+        
     }
-
-//    public boolean ingresarSaldo(double dinero) {
-//        boolean correcto = true;
-//        if (dinero < 0) {
-//            correcto = false;
-//        } else if (saldo >= dinero) {
-//            saldo += dinero;
-//        } else {
-//            correcto = false;
-//        }
-//        return correcto;
-//    }
     public void retirarSaldo(double dinero) {
         if (dinero <= 0) {
-            dinero = 0;
+            JOptionPane.showMessageDialog(null, "No tienes dinero para retirar.");
+        } else if (saldo >= dinero) {
+            saldo -= dinero;
         }
-        saldo -= dinero;
     }
 
 //    public boolean retirarSaldo(double dinero){
@@ -82,8 +82,12 @@ public class Conta {
     }
 
     public void transferencia(Conta origen, double importe) {
+        if (importe <= 0){
+            JOptionPane.showMessageDialog(null, "Error, no se puede hacer la transferencia.");
+        } else {
         retirarSaldo(importe);
         origen.ingresarSaldo(importe);
+        }
     }
 
 //    public boolean transferencia(Conta origen, double importe) {
