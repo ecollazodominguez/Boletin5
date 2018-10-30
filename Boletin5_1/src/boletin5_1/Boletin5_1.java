@@ -20,10 +20,10 @@ public class Boletin5_1 {
         cuentaDestino.amosarDatos();
 
         //hago transferencia de cOrigen a cDestino y muestro
-        cuentaOrigen.transferencia(cuentaDestino, 2000);
+        cuentaOrigen.transferencia(cuentaDestino,cuentaOrigen);
 
-        cuentaDestino.amosarDatos();
         cuentaOrigen.amosarDatos();
+        cuentaDestino.amosarDatos();
     }
 
 }

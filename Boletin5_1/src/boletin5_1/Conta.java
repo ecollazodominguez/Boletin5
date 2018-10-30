@@ -2,10 +2,23 @@ package boletin5_1;
 
 import javax.swing.JOptionPane;
 
+/**
+ * Control de cuentas bancarias y operaciones.
+ * @author ecollazodominguez
+ */
 public class Conta {
 
+    /**
+     * Nombre de cliente.
+     */
     private String nome;
+    /**
+     * Número de cuenta bancaria.
+     */
     private String numConta;
+    /**
+     * Saldo de la cuenta bancaria.
+     */
     private double saldo;
 
     public Conta() {
@@ -17,39 +30,53 @@ public class Conta {
         this.numConta = conta;
         this.saldo = saldo;
     }
-
+    /**
+     * Se añade un nombre al cliente.
+     * @param nome nombre del cliente.
+     */
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    /**
+     * Se registra un número de cuenta al cliente.
+     * @param numConta número de cuenta.
+     */
     public void setNumConta(String numConta) {
         this.numConta = numConta;
     }
-
+    /**
+     * Se registra un saldo de cuenta.
+     * @param saldo saldo de cuenta.
+     */
     public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
-
+    /**
+     * Envia nombre del cliente
+     * @return nombre del cliente.
+     */
     public String getNome() {
         return nome;
     }
-
+    /**
+     * Envia número de cuenta del cliente
+     * @return número cuenta del cliente.
+     */
     public String getNumConta() {
         return numConta;
     }
-
+    /**
+     * Envia saldo en la cuenta bancaria.
+     * @return saldo en la cuenta bancaria.
+     */
     public double getSaldo() {
         return saldo;
     }
 
-//    public void ingresarSaldo(double dinero) {
-//        if (dinero <= 0) {
-//            dinero = 0;
-//        }
-//        saldo += dinero;
-//
-//    }
-
+    /**
+     * Ingresa saldo a una cuenta bancaria.
+     * @param dinero cantidad a ingresar.
+     */
     public void ingresarSaldo(double dinero) {
         if (dinero <= 0) {
             JOptionPane.showMessageDialog(null, "No tienes dinero para ingresar.");
@@ -58,6 +85,10 @@ public class Conta {
         }
         
     }
+    /**
+     * Retira saldo a una cuenta bancaria.
+     * @param dinero cantidad a retirar.
+     */
     public void retirarSaldo(double dinero) {
         if (dinero <= 0) {
             JOptionPane.showMessageDialog(null, "No tienes dinero para retirar.");
@@ -65,41 +96,27 @@ public class Conta {
             saldo -= dinero;
         }
     }
-
-//    public boolean retirarSaldo(double dinero){
-//    boolean correcto = true;
-//       if (dinero < 0){
-//                correcto = false;
-//            } else if (saldo >= dinero) {
-//                saldo -= dinero;
-//            } else {
-//                correcto = false;
-//            }
-//            return correcto;
-//        }
+    /**
+     * Muestra la información del cliente.
+     */
     public void amosarDatos() {
         System.out.println("\nNome: " + nome + "\nConta: " + numConta + "\nSaldo: " + saldo);
     }
-
-    public void transferencia(Conta origen, double importe) {
+    /**
+     * Transfiere saldo de una cuenta a otra.
+     * @param destino cuenta que recibe el dinero.
+     * @param origen cuenta que transfiere el dinero.
+     */
+    public void transferencia(Conta destino, Conta origen) {
+        double importe = Double.parseDouble(JOptionPane.showInputDialog("Cantidad a transferir:"));
         if (importe <= 0){
             JOptionPane.showMessageDialog(null, "Error, no se puede hacer la transferencia.");
+        } else if (importe > origen.getSaldo()) {
+            JOptionPane.showMessageDialog(null, "Error, no se puede hacer la transferencia.");
         } else {
-        retirarSaldo(importe);
-        origen.ingresarSaldo(importe);
+        origen.retirarSaldo(importe);
+        destino.ingresarSaldo(importe);
         }
     }
 
-//    public boolean transferencia(Conta origen, double importe) {
-//        boolean correcto = true;
-//        if (importe < 0) {
-//            correcto = false;
-//        } else if (saldo >= importe) {
-//            reintegroSaldo(importe);
-//            origen.ingresoSaldo(importe);
-//        } else {
-//            correcto = false;
-//        }
-//        return correcto;
-//    }
 }
